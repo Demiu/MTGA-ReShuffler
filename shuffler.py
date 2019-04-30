@@ -89,7 +89,9 @@ def separate_basics(decklist):
             basic_indexes.append(i)
 
     for index in basic_indexes:
-        landlist_dirty.append(decklist.pop(index))
+        landlist_dirty.append(decklist[index])
+    for index in sorted(basic_indexes, reverse=True):
+        decklist.pop(index)
 
     return landlist_dirty, decklist
 
@@ -489,7 +491,7 @@ def print_decklist(decklist):
     print ("\nYou can now import this into MTGA")
 
 def main(argv):
-    # TODO
+    # TODO this here and handling sideboards
     # parser = argparse.argumentParser(description="A simple decklist shuffler for MTG Arena",
     #                                 epilog="Made by Demiu",
     #                                 formatter_class=argparse.RawTextHelpFormatter)
@@ -540,24 +542,37 @@ def main(argv):
     print_decklist(decklist)
 
 
+# Test deck
+"""
+2 Skymarcher Aspirant (RIX) 21
+4 Dusk Legion Zealot (RIX) 70
+4 Legion Lieutenant (RIX) 163
+4 Martyr of Dusk (RIX) 14
+2 Paladin of Atonement (RIX) 16
+3 Sanctum Seeker (XLN) 120
+2 Twilight Prophet (RIX) 88
+3 Queen's Commission (XLN) 29
+4 Call to the Feast (XLN) 219
+4 Legion's Landing (XLN) 22
+4 Radiant Destiny (RIX) 18
+4 Conclave Tribunal (GRN) 6
+1 Arch of Orazca (RIX) 185
+1 Isolated Chapel (DAR) 241
+1 Orzhov Guildgate (RNA) 252
+8 Plains (M19) 261
+6 Swamp (M19) 269
+3 Unclaimed Territory (XLN) 258
 
-
-    
-
-
-"""4 Lightning Strike (M19) 152
-3 Shock (M19) 156
-4 Viashino Pyromancer (M19) 166
-20 Mountain (M19) 274
-3 Experimental Frenzy (GRN) 99
-2 Runaway Steam-Kin (GRN) 115
-4 Light Up the Stage (RNA) 107
-2 Runaway Steam-Kin (GRN) 115
-3 Skewer the Critics (RNA) 115
-4 Ghitu Lavarunner (DAR) 127
-4 Goblin Chainwhirler (DAR) 129
-3 Wizard's Lightning (DAR) 152
-4 Fanatical Firebrand (RIX) 101"""
+2 Duress (XLN) 105
+1 Settle the Wreckage (XLN) 34
+1 Kaya's Wrath (RNA) 187
+1 Vampire's Zeal (XLN) 43
+1 Never Happened (GRN) 80
+4 Bishop's Soldier (XLN) 6
+2 Cast Down (DAR) 81
+2 Ajani's Welcome (M19) 6
+1 Ixalan's Binding (XLN) 17
+"""
 
 # Call main
 if __name__ == "__main__":
