@@ -1,6 +1,6 @@
-# MTGA Decklist Shuffler
+# MTGA Decklist ReShuffler
 
-A simple tool for reordering 
+A simple tool for reordering a decklist meant for Magic The Gathering: Arena video game. The need for this tool arose when some users noticed that MTGA's deck shuffling alghoritm is flawed in such a way that cards on the front of the deck had a higher chance of being drawn then the cards at the back. This meant that, sadly, the chances of one card being drawn at the start of a game could be influenced by changing the order of the unshuffled deck. As such I've created this here reshuffler to streamline that process. This program is NOT a cheat; it does not modify the game's files in any way whatsoever and anything it does can be done in notepad, just more tediously. All decklists that are successfully imported into MTGA are valid and legitimate.
 
 ## Getting Started
 

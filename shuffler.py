@@ -486,6 +486,7 @@ def print_decklist(decklist):
     print("\nHere's your new decklist:")
     for entry in decklist:
         print(entry[0], entry[1], "(" + entry[2] + ")", entry[3])
+    print ("\nYou can now import this into MTGA")
 
 def main(argv):
     # TODO
