@@ -23,10 +23,11 @@ class Position(IntEnum):
 position_name = ("wherever", "at the top", "in the middle", "at the bottom")
 
 # Reads decklist from the user
-# Returns read decklist size, decklist list
-def parse_decklist():
+# Returns read decklist size, decklist list, sideboard string
+def parse_decklist(has_sideboard):
     decksize = 0
     decklist = []
+    sideboard = []
 
     print("Paste in your decklist (has to be in Arena's format), ")
     print("an empty line indicates the end of the list:")
@@ -73,8 +74,15 @@ def parse_decklist():
     if (decksize == 0):
         print("You have to parse in a decklist! (is there an empty line at the start?)")
         return 0, []
+    
+    while True:
+        line = input(">")
+        if len(line) == 0:
+            break
+        
+        sideboard.append(line)
 
-    return decksize, decklist
+    return decksize, decklist, sideboard
 
 # Removes basics from decklist into another list
 # Returns (separated list of lands, new decklist without said lands)
@@ -484,24 +492,22 @@ def make_new_decklist(decksize, decklist, landlist, nbllist, landpos, nblpos, la
     return new_decklist
 
 # Prints the decklist in the MTGA format
-def print_decklist(decklist):
+def print_decklist(decklist, sideboard):
     print("\nHere's your new decklist:")
     for entry in decklist:
         print(entry[0], entry[1], "(" + entry[2] + ")", entry[3])
+    
+    if sideboard != "":
+        print("")
+        print(sideboard)
+
     print ("\nYou can now import this into MTGA")
 
 def main(argv):
-    # TODO this here and handling sideboards
-    # parser = argparse.argumentParser(description="A simple decklist shuffler for MTG Arena",
-    #                                 epilog="Made by Demiu",
-    #                                 formatter_class=argparse.RawTextHelpFormatter)
-
-    # parser.add_argument("-nbl", "--nonbasic-lands",
-    # action="append")
-
     decksize = 0
     # list of tuples, elements of the tuple are (amount, name, set code, collector's num) in this order
     decklist = []
+    sideboard = ""
     # list of basic lands, grouped by type
     landlist = []
     # list of positions for each basic land type
@@ -515,7 +521,10 @@ def main(argv):
     # list of fake cmcs of decklist, for sorting
     manalist = []
 
-    decksize, decklist = parse_decklist()
+    has_sb = input("Does this deck have a sideboard? (y/n): ")
+    has_sb = has_sb.lower() in true_inputs
+
+    decksize, decklist, sideboard = parse_decklist(has_sb)
     if decksize == 0:
         print("Something went wrong, aborting")
         return
@@ -539,7 +548,7 @@ def main(argv):
     manalist = parse_mana(decklist)
 
     decklist = make_new_decklist(decksize, decklist, landlist, nbllist, landpos, nblpos, landprio, manalist)
-    print_decklist(decklist)
+    print_decklist(decklist, sideboard)
 
 
 # Test deck
